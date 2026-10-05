@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Кинематика — тест, 1 курс</title>
+<style>
+:root{--bg:#060714;--panel:#0d1030;--c:#00f0ff;--p:#ff2bd6;--g:#39ff88;--t:#e8f0ff;--m:#8a97c4}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--t);font:16px/1.5 "Segoe UI",system-ui,-apple-system,Roboto,sans-serif;-webkit-user-select:none;user-select:none}
+body{min-height:100dvh;padding:max(14px,env(safe-area-inset-top)) 14px max(14px,env(safe-area-inset-bottom));background:radial-gradient(900px 500px at 10% -10%,#2a0f4d55,transparent),radial-gradient(800px 500px at 100% 110%,#00386655,transparent),var(--bg)}
+.wrap{max-width:640px;margin:0 auto}
+.screen{display:none}.screen.on{display:block}
+.card{background:linear-gradient(160deg,#10143a,#0a0c26);border:1px solid #2a3a8c;border-radius:20px;padding:22px;box-shadow:0 0 28px #00f0ff1f,inset 0 0 30px #ff2bd60d}
+h1{font-size:1.55rem;line-height:1.2;margin:0 0 6px;color:#fff;text-shadow:0 0 14px var(--c)}
+h2{font-size:1.2rem;margin:0 0 10px;color:#fff;text-shadow:0 0 10px var(--p)}
+.sub{color:var(--m);margin:0 0 18px}
+.teacher{display:inline-block;padding:6px 12px;border:1px solid var(--p);border-radius:99px;color:#ffd0f5;box-shadow:0 0 14px #ff2bd655;margin-bottom:18px;font-size:.92rem}
+label{display:block;font-size:.9rem;color:var(--m);margin:14px 0 6px}
+input[type=text],select,.num{width:100%;padding:14px;border-radius:12px;border:1px solid #33449c;background:#070a22;color:#fff;font-size:16px;outline:none;-webkit-user-select:text;user-select:text}
+input:focus,select:focus{border-color:var(--c);box-shadow:0 0 14px #00f0ff77}
+.btn{width:100%;margin-top:22px;padding:15px;border-radius:14px;border:1px solid #33449c;background:#0a0d2a;color:#5f6ca3;font-size:1.05rem;font-weight:600;transition:.2s}
+.btn.on{color:#001418;background:var(--c);border-color:var(--c);box-shadow:0 0 22px var(--c),0 0 48px #00f0ff66;cursor:pointer}
+.btn:disabled{cursor:not-allowed}
+.rules li{margin:8px 0;color:#cfd8ff}
+.chk{display:flex;gap:10px;align-items:flex-start;margin-top:16px;color:#cfd8ff;font-size:.95rem}
+.chk input{width:22px;height:22px;accent-color:var(--p);flex:none}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:var(--m);font-size:.9rem}
+.tm{font-weight:700;color:var(--c);text-shadow:0 0 10px var(--c);font-variant-numeric:tabular-nums}
+.tm.low{color:var(--p);text-shadow:0 0 10px var(--p)}
+.bar{height:5px;background:#141a45;border-radius:9px;overflow:hidden;margin-bottom:16px}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--p),var(--c));box-shadow:0 0 10px var(--c);transition:width 1s linear}
+.q{font-size:1.1rem;margin:0 0 14px;color:#fff}
+.opt{display:block;width:100%;text-align:left;margin:10px 0;padding:14px 16px;border-radius:14px;border:1px solid #2c3a8a;background:#080b25;color:var(--t);font-size:1rem;transition:.15s}
+.opt.sel{border-color:var(--g);background:#0a2a22;color:#fff;box-shadow:0 0 18px var(--g),inset 0 0 14px #39ff8844}
+.gr{margin:4px 0 12px}
+.gr svg{width:100%;height:auto;display:block;border-radius:10px;box-shadow:0 0 16px #00f0ff33}
+.gr text{font:10px "Segoe UI",sans-serif;fill:#cfe8ff}
+.score{font-size:3.4rem;font-weight:800;color:var(--g);text-shadow:0 0 22px var(--g);margin:6px 0}
+.row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #1f2a6a;font-size:.95rem}
+.row b{color:#fff;text-align:right}
+.modal{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;padding:20px;z-index:9}
+.modal.on{display:flex}
+.modal .card{border-color:var(--p);box-shadow:0 0 34px #ff2bd699;max-width:420px}
+@media(max-width:420px){.card{padding:16px}h1{font-size:1.3rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section id="s1" class="screen on"><div class="card">
+ <span class="teacher">Учитель физики: Кунгозин Даулет Багдашұлы</span>
+ <h1>Кинематика: уравнения и графики движения</h1>
+ <p class="sub">Тест для 1 курса колледжа · 10 вопросов · 10 баллов</p>
+ <label for="nm">Фамилия и имя</label>
+ <input id="nm" type="text" autocomplete="off" placeholder="Введите ФИ">
+ <label for="gr">Группа</label>
+ <select id="gr"><option value="">Выберите группу</option><option>Т-116</option><option>ПМЛ-116</option></select>
+ <label for="vr">Вариант</label>
+ <select id="vr"><option value="">Выберите вариант</option><option value="1">Вариант 1</option><option value="2">Вариант 2</option></select>
+ <button id="b1" class="btn" disabled>Далее</button>
+</div></section>
+
+<section id="s2" class="screen"><div class="card">
+ <h2>Дисклеймер</h2>
+ <ul class="rules">
+  <li>На каждый вопрос даётся 1,5 минуты. По истечении времени тест сам переходит к следующему вопросу.</li>
+  <li>Вернуться к предыдущему вопросу нельзя. Правильность ответов не показывается.</li>
+  <li>Не сворачивайте вкладку или браузер: тест завершится автоматически, а попытка будет засчитана.</li>
+  <li>Попытка выдвинуть второе окно поверх теста: первый раз — предупреждение, второй раз — тест завершается.</li>
+  <li>Выполняйте работу самостоятельно, без подсказок и сторонних источников. Принимаем <i>g</i> = 10 м/с².</li>
+ </ul>
+ <label class="chk"><input type="checkbox" id="ok"><span>Я ознакомился с правилами и обязуюсь соблюдать академическую честность.</span></label>
+ <button id="b2" class="btn" disabled>Начать тест</button>
+</div></section>
+
+<section id="s3" class="screen"><div class="card">
+ <div class="top"><span id="qn"></span><span class="tm" id="tm">1:30</span></div>
+ <div class="bar"><i id="pb"></i></div>
+ <p class="q" id="qt"></p>
+ <div class="gr" id="qg"></div>
+ <div id="qa"></div>
+ <button id="bn" class="btn" disabled>Далее</button>
+</div></section>
+
+<section id="s4" class="screen"><div class="card">
+ <h2>Результаты</h2>
+ <div class="score" id="rs"></div>
+ <div id="rr"></div>
+ <p class="sub" id="rn" style="margin-top:14px"></p>
+</div></section>
+</div>
+
+<div class="modal" id="wm"><div class="card">
+ <h2>Предупреждение</h2>
+ <p>Обнаружена попытка открыть второе окно поверх теста. При повторном нарушении тест будет завершён автоматически.</p>
+ <button class="btn on" id="wb">Вернуться к тесту</button>
+</div></div>
+
+<script>
+'use strict';
+const SHEETS_URL='https://script.google.com/macros/s/AKfycbzNSb5FfLWDdI8R2FrWUX8B0lrVDG79aDRbeNHVH7q9-LQl0Skk3HBYmW5aE4GrPwMFRQ/exec'; // URL веб-приложения Apps Script
+const TIME=90;
+
+// SVG-график в клетку: оси подписаны величинами и пронумерованы
+const G=(xl,yl,xm,ym,p)=>{
+ const W=300,H=220,L=42,B=34,T=14,R=14,sx=(W-L-R)/xm,sy=(H-T-B)/ym,st=ym>10?2:1,X=v=>L+v*sx,Y=v=>H-B-v*sy;
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img"><rect width="${W}" height="${H}" rx="10" fill="#0b0d22"/>`;
+ for(let i=0;i<=xm;i++)s+=`<line x1="${X(i)}" y1="${T}" x2="${X(i)}" y2="${H-B}" stroke="#1f3f66"/><text x="${X(i)}" y="${H-B+13}" text-anchor="middle">${i}</text>`;
+ for(let j=0;j<=ym;j++)s+=`<line x1="${L}" y1="${Y(j)}" x2="${W-R}" y2="${Y(j)}" stroke="#1f3f66"/>`+(j%st?'':`<text x="${L-5}" y="${Y(j)+3}" text-anchor="end">${j}</text>`);
+ s+=`<path d="M${L} ${H-B}H${W-R+4}M${L} ${H-B}V${T-4}" stroke="#00f0ff" stroke-width="1.8" fill="none"/>`;
+ s+=`<text x="${W-R}" y="${H-5}" text-anchor="end" style="font-size:11px">${xl}</text><text x="3" y="11" style="font-size:11px">${yl}</text>`;
+ s+=`<polyline points="${p.map(a=>X(a[0])+','+Y(a[1])).join(' ')}" fill="none" stroke="#ff2bd6" stroke-width="2.6" style="filter:drop-shadow(0 0 3px #ff2bd6)"/>`;
+ p.forEach(a=>s+=`<circle cx="${X(a[0])}" cy="${Y(a[1])}" r="3.4" fill="#fff"/>`);
+ return s+'</svg>';
+};
+const vt=(p,xm,ym)=>G('t, с','v, м/с',xm,ym,p), xt=(p,xm,ym)=>G('t, с','x, м',xm,ym,p);
+
+const DATA={
+1:[
+ {t:'Закон движения тела: x = 5 + 3t + 2t² (СИ). Чему равно ускорение тела?',o:['2 м/с²','3 м/с²','4 м/с²','5 м/с²'],a:2},
+ {t:'По графику зависимости скорости от времени определите ускорение тела.',g:vt([[0,2],[4,10]],5,12),o:['1 м/с²','2 м/с²','2,5 м/с²','4 м/с²'],a:1},
+ {t:'По графику зависимости координаты от времени определите проекцию скорости тела.',g:xt([[0,6],[3,0]],4,6),o:['−3 м/с','−2 м/с','2 м/с','3 м/с'],a:1},
+ {t:'Тело свободно падает без начальной скорости. Какая формула выражает путь за время t?',o:['h = gt','h = gt²/2','h = g²t/2','h = v₀t + gt'],a:1},
+ {t:'Камень брошен вертикально вверх. Каковы скорость и ускорение в верхней точке траектории?',o:['v = 0, a = 0','v = 0, a = g, направлено вниз','v = v₀, a = g','v = 0, a = g, направлено вверх'],a:1},
+ {t:'По графику определите путь, пройденный телом за 4 с.',g:vt([[0,8],[4,0]],5,8),o:['8 м','16 м','32 м','4 м'],a:1},
+ {t:'Тело свободно падает с высоты 80 м без начальной скорости. Найдите скорость у поверхности Земли (g = 10 м/с²).',n:40},
+ {t:'Камень брошен вертикально вверх со скоростью 20 м/с. Найдите высоту подъёма в метрах (g = 10 м/с²).',n:20},
+ {t:'Тело брошено вертикально вверх со скоростью 30 м/с. На какой высоте (в метрах) оно окажется через 2 с? (g = 10 м/с²)',n:40},
+ {t:'Камень падает с крыши здания без начальной скорости и достигает земли за 3 с. Определите высоту здания в метрах (g = 10 м/с²).',n:45}],
+2:[
+ {t:'Закон движения тела: x = 2 + 4t + 3t² (СИ). Чему равно ускорение тела?',o:['3 м/с²','4 м/с²','6 м/с²','8 м/с²'],a:2},
+ {t:'По графику зависимости скорости от времени определите ускорение тела.',g:vt([[0,1],[4,13]],5,13),o:['2 м/с²','3 м/с²','4 м/с²','12 м/с²'],a:1},
+ {t:'По графику зависимости координаты от времени определите скорость тела.',g:xt([[0,0],[2,8]],4,8),o:['2 м/с','4 м/с','8 м/с','16 м/с'],a:1},
+ {t:'Какая формула выражает скорость тела у земли при свободном падении с высоты h без начальной скорости?',o:['v = √(2gh)','v = 2gh','v = gh²','v = √(gh)/2'],a:0},
+ {t:'Тело брошено вертикально вверх со скоростью v₀. Через какое время оно достигнет верхней точки?',o:['t = v₀/g','t = 2v₀/g','t = v₀g','t = v₀²/2g'],a:0},
+ {t:'По графику определите путь, пройденный телом за 5 с.',g:vt([[0,0],[5,10]],6,10),o:['10 м','25 м','50 м','5 м'],a:1},
+ {t:'Тело свободно падает с высоты 45 м без начальной скорости. Найдите скорость у поверхности Земли (g = 10 м/с²).',n:30},
+ {t:'Камень брошен вертикально вверх со скоростью 30 м/с. Найдите высоту подъёма в метрах (g = 10 м/с²).',n:45},
+ {t:'Тело брошено вертикально вверх со скоростью 25 м/с. На какой высоте (в метрах) оно окажется через 3 с? (g = 10 м/с²)',n:30},
+ {t:'Камень падает с крыши здания без начальной скорости и достигает земли за 4 с. Определите высоту здания в метрах (g = 10 м/с²).',n:80}]
+};
+
+const $=id=>document.getElementById(id);
+let Q=[],i=0,ans=[],left=TIME,timer=null,done=false,armed=false,strikes=0,blurred=false,attempts=0,user={};
+const show=id=>{document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('on',e.id===id));scrollTo(0,0)};
+const key=u=>'kin_'+(u.name+'|'+u.group).toLowerCase().replace(/\s+/g,' ');
+
+// Экран 1
+const chk1=()=>{const ok=$('nm').value.trim().length>3&&$('gr').value&&$('vr').value;$('b1').disabled=!ok;$('b1').classList.toggle('on',!!ok)};
+['input','change'].forEach(e=>['nm','gr','vr'].forEach(id=>$(id).addEventListener(e,chk1)));
+$('b1').onclick=()=>{user={name:$('nm').value.trim(),group:$('gr').value,variant:$('vr').value};show('s2')};
+$('ok').onchange=()=>{$('b2').disabled=!$('ok').checked;$('b2').classList.toggle('on',$('ok').checked)};
+
+// Старт теста
+$('b2').onclick=()=>{
+ try{attempts=(+localStorage.getItem(key(user))||0)+1;localStorage.setItem(key(user),attempts)}catch(e){attempts=1}
+ Q=DATA[user.variant].map(q=>{if(!q.o)return q;const idx=q.o.map((_,k)=>k).sort(()=>Math.random()-.5);return{...q,o:idx.map(k=>q.o[k]),a:idx.indexOf(q.a)}});
+ i=0;ans=[];strikes=0;done=false;show('s3');render();
+ setTimeout(()=>armed=true,1500);
+};
+
+function render(){
+ const q=Q[i];left=TIME;$('qn').textContent=`Вопрос ${i+1} из ${Q.length}`;$('qt').textContent=q.t;
+ $('qg').innerHTML=q.g||'';$('bn').textContent=i===Q.length-1?'Завершить':'Далее';
+ const box=$('qa');box.innerHTML='';setBtn(false);ans[i]=null;
+ if(q.o){q.o.forEach((t,k)=>{const b=document.createElement('button');b.className='opt';b.textContent=t;
+  b.onclick=()=>{[...box.children].forEach(c=>c.classList.remove('sel'));b.classList.add('sel');ans[i]=k;setBtn(true)};box.appendChild(b)})}
+ else{const n=document.createElement('input');n.className='num';n.type='text';n.inputMode='decimal';n.autocomplete='off';n.placeholder='Введите число без единиц измерения';
+  n.oninput=()=>{n.value=n.value.replace(/[^0-9.,\-]/g,'');ans[i]=n.value.trim()||null;setBtn(!!n.value.trim())};box.appendChild(n)}
+ tick(true);clearInterval(timer);timer=setInterval(tick,1000);
+}
+function setBtn(on){$('bn').disabled=!on;$('bn').classList.toggle('on',on)}
+function tick(init){
+ if(init!==true)left--;
+ $('tm').textContent=Math.floor(Math.max(left,0)/60)+':'+String(Math.max(left,0)%60).padStart(2,'0');
+ $('tm').classList.toggle('low',left<=15);
+ const pb=$('pb');if(init===true){pb.style.transition='none';pb.style.width='100%';void pb.offsetWidth;pb.style.transition=''}
+ pb.style.width=Math.max(left,0)/TIME*100+'%';
+ if(left<=0)next();
+}
+function next(){if(done)return;if(i>=Q.length-1){finish('Тест завершён');return}i++;render()}
+$('bn').onclick=()=>{if(!$('bn').disabled)next()};
+
+// Подсчёт и отправка
+function score(){return Q.reduce((s,q,k)=>{const a=ans[k];if(a==null)return s;
+ if(q.o)return s+(a===q.a?1:0);const v=parseFloat(String(a).replace(',','.'));return s+(Math.abs(v-q.n)<0.01?1:0)},0)}
+function finish(reason){
+ if(done)return;done=true;armed=false;clearInterval(timer);$('wm').classList.remove('on');
+ const sc=score(),forced=reason!=='Тест завершён';
+ $('rs').textContent=sc+' / 10';
+ $('rr').innerHTML=[['Ученик',user.name],['Группа',user.group],['Вариант',user.variant],['Использовано попыток',attempts],['Статус',reason]].map(r=>`<div class="row"><span>${r[0]}</span><b>${r[1]}</b></div>`).join('');
+ $('rn').textContent=forced?'Тест завершён автоматически, попытка засчитана. Результат передан учителю.':'Результат передан учителю!';
+ show('s4');
+ try{fetch(SHEETS_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},
+  body:JSON.stringify({name:user.name,group:user.group,variant:user.variant,score:sc,attempts,status:reason,answered:ans.filter(a=>a!=null).length})})}catch(e){}
+}
+
+// Античит
+// Сворачивание вкладки/браузера — завершение. Второе окно (потеря фокуса при видимой странице) — предупреждение, затем завершение.
+// Экранная клавиатура фокус окна не меняет, поэтому не срабатывает.
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&armed&&!done)finish('Античит: вкладка свёрнута')});
+addEventListener('pagehide',()=>{if(armed&&!done)finish('Античит: страница закрыта')});
+addEventListener('blur',()=>{
+ if(!armed||done||blurred)return;blurred=true;
+ setTimeout(()=>{ if(document.hidden||done)return;
+  if(!document.hasFocus()){strikes++;if(strikes>=2)finish('Античит: открыто второе окно');else $('wm').classList.add('on')}
+  else blurred=false },600);
+});
+addEventListener('focus',()=>{blurred=false});
+$('wb').onclick=()=>$('wm').classList.remove('on');
+['contextmenu','copy','cut','paste','dragstart'].forEach(e=>document.addEventListener(e,ev=>ev.preventDefault()));
+</script>
+</body>
+</html>
